@@ -2,7 +2,6 @@ package com.qlsv.model;
 
 import java.util.Date;
 
-import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -13,28 +12,31 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-public class Student {
+public class PersonalInformation {
 
 	public static final String[] GENDER = {"Nam", "Nữ"};
+	public static final String[] RELATIONSHIP = {"Bố", "Mẹ", "Anh", "Chị", "Em"};
 	
 	@Id
 	private int id;
 	
+	private int idStudent;
+	
 	@NotBlank(message = "FullName is mandatory")
 	private String fullName;
-
+	
+	@Min(value = 1, message = "Relation is from 1-5")
+	@Max(value = 5, message = "Relation is from 1-5")
+	private int relationship;
+	
 	@DateTimeFormat(iso = ISO.DATE)
 	private Date birthDate;
 	
 	@Min(value = 1, message = "Gender is 1 or 2")
 	@Max(value = 2, message = "Gender is 1 or 2")
 	private int gender;
-	
-	@Min(value = 0, message = "GPA is from 0-10")
-	@Max(value = 10, message = "GPA is from 0-10")
-	private int GPA;
 
-	public Student() {
+	public PersonalInformation() {
 	}
 
 	public int getId() {
@@ -45,12 +47,28 @@ public class Student {
 		this.id = id;
 	}
 
+	public int getIdStudent() {
+		return idStudent;
+	}
+
+	public void setIdStudent(int idStudent) {
+		this.idStudent = idStudent;
+	}
+
 	public String getFullName() {
 		return fullName;
 	}
 
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
+	}
+
+	public int getRelationship() {
+		return relationship;
+	}
+
+	public void setRelationship(int relationship) {
+		this.relationship = relationship;
 	}
 
 	public Date getBirthDate() {
@@ -67,19 +85,5 @@ public class Student {
 
 	public void setGender(int gender) {
 		this.gender = gender;
-	}
-
-	public int getGPA() {
-		return GPA;
-	}
-
-	public void setGPA(int gPA) {
-		GPA = gPA;
-	}
-
-	@Override
-	public String toString() {
-		return "Student [id=" + id + ", fullName=" + fullName + ", birthDate=" + birthDate + ", gender=" + gender
-				+ ", GPA=" + GPA + "]";
 	}
 }

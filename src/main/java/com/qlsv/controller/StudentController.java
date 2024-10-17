@@ -29,6 +29,7 @@ public class StudentController {
 		
 		model.addAttribute("listStudent", list);
 		model.addAttribute("dateFormat", df);
+		model.addAttribute("GENDER", Student.GENDER);
 		
 		return "student/index";
 	}
@@ -47,8 +48,8 @@ public class StudentController {
 			return "student/add";
 		}
 		
-		model.addAttribute("message", "Create student Success!");
 		studentService.addStudent(student);
+		model.addAttribute("message", "Create Student Success!");
 		
 		return getStudent(model);
 	}

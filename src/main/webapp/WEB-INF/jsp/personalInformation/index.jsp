@@ -6,17 +6,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Index</title>
+    <title>Personal Information</title>
 
 	<link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet"
 			type="text/css">
 </head>
 
 <body>
-    <h1>List Student</h1>
+    <h1>List Personal Information</h1>
 
-	<a href="/student-add">Add Personal Information</a>
-
+    <a href="/personalInformation-add?idStudent=${ idStudent }">Add Personal Information</a>
+	
     <div id="wrapper">
 
         <div id="content-wrapper" class="d-flex flex-column">
@@ -30,41 +30,35 @@
                                         <tr>
                                             <th>Id</td>
                                             <th>FullName</th>
+                                            <th>Relationship</th>
                                             <th>BirthDate</th>
                                             <th>Gender</th>
-                                            <th>GPA</th>
-                                            <th>#</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>Id</td>
                                             <th>FullName</th>
+                                            <th>Relationship</th>
                                             <th>BirthDate</th>
                                             <th>Gender</th>
-                                            <th>GPA</th>
-                                            <th>#</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <c:choose>
-                                            <c:when test="${listStudent == null || listStudent.size() == 0}">
+                                            <c:when test="${listInfo == null || listInfo.size() == 0}">
                                                 <tr>
-                                                    <td>List Student is Empty!</td>
+                                                    <td>List Personal Information is Empty!</td>
                                                 </tr>
                                             </c:when>
                                             <c:otherwise>
-                                                <c:forEach items="${listStudent}" var="s">
+                                                <c:forEach items="${listInfo}" var="p">
                                                     <tr>
-                                                        <th scope="row">${s.getId()}</th>
-                                                        <td>${s.getFullName()}</td>
-                                                        <td>${ s.getBirthDate() != null ? dateFormat.format(s.getBirthDate()) : "" }</td>
-                                                        <td>${ GENDER[s.getGender() - 1] }</td>
-                                                        <td>${s.getGPA()}</td>
-                                                        <td>
-                                                            <a href="/personalInformation?idStudent=${ s.getId() }">Personal
-                                                                Information</a>
-                                                        </td>
+                                                        <th scope="row">${p.getId()}</th>
+                                                        <td>${p.getFullName()}</td>
+                                                        <td>${ RELATIONSHIP[p.getRelationship() - 1] }</td>
+                                                        <td>${ p.getBirthDate() != null ? dateFormat.format(p.getBirthDate()) : "" }</td>
+                                                        <td>${ GENDER[p.getGender() - 1] }</td>
                                                     </tr>
                                                 </c:forEach>
                                             </c:otherwise>
